@@ -1,0 +1,17 @@
+[Unit]
+Description=Lissajous item 5 HMI gateway and FPGA controller
+After=multi-user.target
+
+[Service]
+Type=simple
+User=siergtc
+SupplementaryGroups=dialout video
+WorkingDirectory=/home/siergtc/task5_cpp
+ExecStart=/usr/local/bin/task5_hmi_gateway --screen /dev/ttyACM0 --fpga /dev/ttyUSB0 --screen-baud 115200 --camera /dev/video0 --runtime /usr/local/bin/task5_runtime -- --frequency-windows 3 --frequency-window-ms 1000
+Restart=always
+RestartSec=2
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
